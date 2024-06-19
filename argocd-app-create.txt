@@ -1,0 +1,28 @@
+argocd app create nginx \
+  --repo git@github.com:amitopenwriteup/nginx-argoproj.git \
+  --path nginx \
+  --revision main \
+  --dest-namespace stage-nginx-namespace \
+  --dest-name arn:aws:eks:ap-south-1:130705418859:cluster/stage-devseccops-eks-cluster \
+  --project stage-devseccops \
+  --sync-policy automated
+
+argocd app list
+
+argocd app delete argocd/nginx
+
+#name of your yaml file
+
+
+argocd app create -f nginx.yaml
+
+#Wait for 5 min
+
+argocd app sync argocd/nginx
+
+#Modify deployment yaml , replica
+
+argocd app sync argocd/nginx
+
+
+
