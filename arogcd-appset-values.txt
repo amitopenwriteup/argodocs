@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-values
+  namespace: argocd
+data:
+  values.yaml: |
+    replicaCount: 2
+    image:
+      repository: nginx
+      tag: stable
+    service:
+      type: LoadBalancer
+      port: 80
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-values
+  namespace: argocd
+data:
+  values.yaml: |
+    replicaCount: 3
+    image:
+      repository: httpd
+      tag: 2.4
+    service:
+      type: ClusterIP
+      port: 80
+---------------------------
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-applications
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - chart: nginx
+            releaseName: my-nginx
+            targetRevision: 18.1.2
+            valuesConfigMap: nginx-values
+          - chart: apache
+            releaseName: my-apache
+            targetRevision: 11.2.5
+            valuesConfigMap: apache-values
+  template:
+    metadata:
+      name: '{{releaseName}}'
+    spec:
+      project: stage-devseccops
+      source:
+        repoURL: https://charts.bitnami.com/bitnami
+        chart: '{{chart}}'
+        targetRevision: '{{targetRevision}}'
+        helm:
+          releaseName: '{{releaseName}}'
+          valueFiles:
+            - /etc/argocd/configmaps/{{valuesConfigMap}}/values.yaml
+      destination:
+        name: arn:aws:eks:ap-south-1:130705418859:cluster/stage-devseccops-eks-cluster
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+---------------------------
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-applications
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - chart: nginx
+            releaseName: my-nginx
+            targetRevision: 18.1.2
+            values: |
+              replicaCount: 2
+              image:
+                repository: nginx
+                tag: stable
+              service:
+                type: LoadBalancer
+                port: 80
+          - chart: apache
+            releaseName: my-apache
+            targetRevision: 11.2.5
+            values: |
+              replicaCount: 3
+              image:
+                repository: httpd
+                tag: 2.4
+              service:
+                type: ClusterIP
+                port: 80
+  template:
+    metadata:
+      name: '{{releaseName}}'
+    spec:
+      project: stage-devseccops
+      source:
+        repoURL: https://charts.bitnami.com/bitnami
+        chart: '{{chart}}'
+        targetRevision: '{{targetRevision}}'
+        helm:
+          releaseName: '{{releaseName}}'
+          values: '{{values}}'
+      destination:
+        name: arn:aws:eks:ap-south-1:130705418859:cluster/stage-devseccops-eks-cluster
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
