@@ -1,3 +1,7 @@
+#Change the app name, which is currently nginx
+#Change the revision, which is currently main
+#Change the destination name space, whihc is currently stage-nginx-namespace
+
 argocd app create nginx \
   --repo git@github.com:amitopenwriteup/nginx-argoproj.git \
   --path nginx \
@@ -9,9 +13,10 @@ argocd app create nginx \
 
 argocd app list
 
+
 argocd app delete argocd/nginx
 
-#name of your yaml file
+#name of your application yaml file
 
 
 argocd app create -f nginx.yaml
