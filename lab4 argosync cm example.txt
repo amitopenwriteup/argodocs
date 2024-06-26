@@ -64,4 +64,4 @@ metadata:
   name: nginx-config
   namespace: stage-nginx-namespace
 data:
-  ENVIRONMENT: stage
+  ENVIRONMENT: test
