@@ -1,0 +1,5 @@
+#Change the revision, currently it is main
+#Change the namespace, currently it is amit-stage-nginx-namespace
+#Chage the application name, currently it is nginx
+
+argocd app create nginx   --repo git@github.com:amitopenwriteup/nginx-argoproj.git   --path nginx-helm   --dest-namespace amit-stage-nginx-namespace   --dest-server https://6C6D06137920FB7B2ADE9485E8FF6ABF.gr7.ap-south-1.eks.amazonaws.com   --project stage-devseccops   --revision main   --values Values.yaml   --values override-values.yaml
