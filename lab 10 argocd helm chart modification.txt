@@ -1,0 +1,14 @@
+lab 10:
+
+
+1) As per lab 9 document create application
+
+2) Now go in the deployment of your application, my namespace name (amit-nginx)
+
+kubectl get pods -n amit-nginx
+
+kubectl edit deployment -n amit-nginx
+
+#Change the replica count
+
+3) check now, it must go out of sync and give remove the replica count to the default one
