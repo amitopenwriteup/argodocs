@@ -25,9 +25,7 @@ argocd app create -f nginx.yaml
 
 argocd app sync argocd/nginx
 
-#Modify deployment yaml , replica
 
-argocd app sync argocd/nginx
 
 
 
