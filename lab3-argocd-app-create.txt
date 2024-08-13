@@ -1,6 +1,6 @@
 #Change the app name, which is currently nginx
 #Change the revision, which is currently main, replace with your branch
-#Change the whihc is currently stage-nginx-namespace
+#check dest-name
 
 argocd app create nginx \
   --repo git@github.com:amitopenwriteup/nginx-argoproj.git \
