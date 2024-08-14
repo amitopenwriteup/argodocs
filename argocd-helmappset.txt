@@ -1,3 +1,6 @@
+#Create a yaml file
+# Line 7: Change the name of application set
+# Line 14 and Line 17 : Change the release name
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
