@@ -1,3 +1,10 @@
+# Create a yaml file using vi (Please use your name initial to identify file)
+# Line 11: Change the application name
+# Line 18 and Line 22: Change the release name
+# Save the yaml file
+# use kubectl create -f <name of the yaml file>
+# argocd appset list; check in UI as well
+# delete the application set, command kubectl delete -f <name of the yaml file>
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
