@@ -1,0 +1,13 @@
+1) Go to this location
+ cd /home/ec2-user/ArgoCD-ApplicationSet-Demo/list-generator-example
+2) copy the applicationset.yaml, where <name> you can provide your name initals
+cp applicationset.yaml <name>-applicationset.yaml
+3) Modify the yaml file
+   - .metadata.name #Change the name of applicationset
+   - .spec.generators.list.elements #Change the namespace name
+4) use kubectl command to create applicationset
+kubectl create -f <name of yaml file>
+5) check three application must create
+argocd appset list
+6) Delete the application set
+kubectl delete -f <name of the yaml file>
