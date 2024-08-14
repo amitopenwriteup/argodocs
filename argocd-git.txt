@@ -1,0 +1,6 @@
+1) Go to location
+cd /home/ec2-user/ArgoCD-ApplicationSet-Demo/git-dir-generator-example
+2)copy application-set.yaml, provide your name initial
+cp application-set.yaml <name>-application-set.yaml
+3) kubectl create -f name of yaml file
+4) argocd appset list
