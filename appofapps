@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps #Change this
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd #Change this
+    server: https://kubernetes.default.svc #Change this
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    path: apps
+  project: default#Change this
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+
+
+-----------------------
+
+Cli
+
+argocd app create apps \ --dest-namespace argocd \ --dest-server https://kubernetes.default.svc \ --repo https://github.com/argoproj/argocd-example-apps.git \ --path apps 
+
