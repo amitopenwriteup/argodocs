@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    name: 'arn:aws:eks:ap-south-1:130705418859:cluster/stage-devseccops-eks-cluster'
+    server: https://kubernetes.default.svc
     namespace: stage-my-amit-helm
   sources:
   - repoURL: 'https://charts.bitnami.com/bitnami'
@@ -14,13 +14,14 @@ spec:
     helm:
       valueFiles:
       - $values/nginx-helm/values.yaml
-  - repoURL: 'git@github.com:amitopenwriteup/nginx-argoproj.git'
+  - repoURL: 'https://github.com/amitopenwriteup/nginx-proj.git'
     targetRevision: main
     ref: values
-  project: stage-devseccops
+  project: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
