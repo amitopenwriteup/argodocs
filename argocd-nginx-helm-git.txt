@@ -8,11 +8,11 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: stage-my-amit-helm
+    namespace: lab1
   sources:
   - repoURL: 'https://charts.bitnami.com/bitnami'
     chart: nginx
-    targetRevision: 18.1.2
+    targetRevision: 22.6.9
     helm:
       valueFiles:
       - $values/nginx-helm/values.yaml
