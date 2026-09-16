@@ -1,4 +1,6 @@
-#create yml file : apphelmgit.yml
+#create yml file : 
+
+vi apphelmgit.yml
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -27,6 +29,6 @@ spec:
     syncOptions:
       - CreateNamespace=true
 
-#create yml file
+#create yml file, save the file
 
 kubectl create -f apphelmgit.yml
